@@ -11,46 +11,47 @@
 //-------------------------------Day2 Of React---------------------------------------------------------
 //we have to use await bcox json return a promise if we use consolt log without await func then we will get a error
 
+import Header from "./components/Header";
+import ResContainer from "./components/ResContainer";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import About from "./components/About";
+import Contact from "./components/Contact";
+import ResDetails from "./components/ResDetails";
 
-import Header from "./components/Header"
-import ResContainer from "./components/ResContainer"
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
-import About from "./components/About"
-import Contact from "./components/Contact"
-import ResDetails from "./components/ResDetails"
-
-const Home=()=>{  
-  return(
+const Home = () => {
+  return (
     <>
-    <Header/>
-    <Outlet/>
+      <Header />
+      <Outlet />
     </>
-  )
-}
-const router=createBrowserRouter([
+  );
+};
+const router = createBrowserRouter([
   {
-    path:"/",
-    element:<Home/>,
-    children:[{
-      path:"/",
-      element:<ResContainer/>
-    },{
-      path:"/about",
-      element:<About/>
-    },{
-      path:"/contact",
-      element:<Contact/>
-    },{
-      path:"/restaurants/:id",
-      element:<ResDetails/>
-    }]
-  }
-
+    path: "/",
+    element: <Home />,
+    children: [
+      {
+        path: "/",
+        element: <ResContainer />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/restaurants/:id",
+        element: <ResDetails />,
+      },
+    ],
+  },
 ]);
-const App=()=>{
-  return(
-    <RouterProvider router={router}/>
-  )
-}
+const App = () => {
+  return <RouterProvider router={router} />;
+};
 
-export default App
+export default App;

@@ -1,5 +1,5 @@
-import ResCard from "./ResCard"
-import { useEffect, useState } from "react"
+import ResCard from "./ResCard";
+import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
 // const restaurants=[{"id": "324129",
@@ -62,60 +62,80 @@ import { FiSearch } from "react-icons/fi";
 //   },
 // ]
 const ResContainer = () => {
-
-  const [restaurants, setrestaurants] = useState([])
-  const [search, setsearch] = useState('')
-  const [List, setList] = useState([])
+  const [restaurants, setrestaurants] = useState([]);
+  const [search, setsearch] = useState("");
+  const [List, setList] = useState([]);
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
   const fetchData = async () => {
-    const res = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=11.0168445&lng=76.9558321&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING')
-    const json = await res.json()
-    setrestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
-    setList(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants)
+    const res = await fetch(
+      "https://food-delivery-cors.vercel.app/api/proxy/swiggy/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+    const json = await res.json();
+    console.log("response=", json);
+    setrestaurants(
+      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    );
+    setList(
+      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    );
     // const listingData = json.data.cards.find(item => item.card.card.id === "restaurant_grid_listing")
     // const restaurantsArr = res.card.card.gridElements.infoWithStyle.restaurants
     // setrestaurants(restaurantsArr)
     // setList(restaurantsArr)
-  }
+  };
   if (restaurants.length == 0) {
-    return(
-      <div className="loading"><h1>Loading...</h1></div>
-    )
+    return (
+      <div className="loading">
+        <h1>Loading...</h1>
+      </div>
+    );
   }
   // const handleupdate=(e)=>{
   //   setsearch(e.target.value)
   // }
   const handlesearch = (e) => {
-    setsearch(e.target.value)
+    setsearch(e.target.value);
     const result = restaurants.filter((res) => {
-    const resName = res.info.name.toLowerCase()
-    return resName.includes(e.target.value.toLowerCase())
-    })
-    console.log(result)
-    setList(result)
-  }
+      const resName = res.info.name.toLowerCase();
+      return resName.includes(e.target.value.toLowerCase());
+    });
+    console.log(result);
+    setList(result);
+  };
 
   const handlefilter = () => {
     const result = List.filter((res) => {
-      return res.info.avgRating >= 4.5
-    })
-    setList(result)
-  }
+      return res.info.avgRating >= 4.5;
+    });
+    setList(result);
+  };
 
   return (
     <>
-      <div className="search-cont"><input value={search} onChange={handlesearch} placeholder="Search your fav food!..."></input>
-        <div className="icon"><FiSearch /></div></div>
-      <div><button className="filter" onClick={handlefilter}>Top rated!</button></div>
+      <div className="search-cont">
+        <input
+          value={search}
+          onChange={handlesearch}
+          placeholder="Search your fav food!..."
+        ></input>
+        <div className="icon">
+          <FiSearch />
+        </div>
+      </div>
+      <div>
+        <button className="filter" onClick={handlefilter}>
+          Top rated!
+        </button>
+      </div>
       <div className="hotel">
         {List.map((x) => {
-          return <ResCard key={x.info.id} restaurants={x.info} />
+          return <ResCard key={x.info.id} restaurants={x.info} />;
         })}
       </div>
     </>
-  )
-}
-export default ResContainer
+  );
+};
+export default ResContainer;
