@@ -1,19 +1,18 @@
-import ItemList from "./ItemList"
+import ItemList from "./ItemList";
 
-const ItemCategory=(props)=>{
-    const category = props.categories
-    return(
-        <>
-        <div className="category">
-            <div>
-            <h3>{category.card.card.title}</h3>
-            </div>
-            {category.card.card.itemCards.map((item)=>{
-                return(<ItemList item={item}/>)
-            })}
-            
+const ItemCategory = (props) => {
+  const category = props.categories;
+  return (
+    <>
+      <div className="category">
+        <div style={{ width: "600px" }}>
+          <h3>{category.card.card.title}</h3>
         </div>
-        </>
-    )
-}
-export default ItemCategory
+        {category.card.card.itemCards.map((item) => {
+          return <ItemList item={item} />;
+        })}
+      </div>
+    </>
+  );
+};
+export default ItemCategory;

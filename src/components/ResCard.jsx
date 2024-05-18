@@ -14,7 +14,7 @@ const ResCard = (props) => {
                 restaurants.cloudinaryImageId
               }
             ></img>
-            10575
+
             <div>
               <h3>{restaurants.name}</h3>
             </div>
