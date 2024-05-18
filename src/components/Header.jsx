@@ -6,7 +6,7 @@ const Header = () => {
       <div className="nav">
         <div>
           <Link to="/">
-            <img src={"../public/assets/logo.jpg"}></img>
+            <img src="/assets/logo.jpg"></img>
           </Link>
         </div>
         <div className="links">
